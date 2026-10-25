@@ -459,7 +459,7 @@ function showAtLane(lane, text, size = 7) {
 
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(p.x, p.y, p.z);
-  mesh.lookAt(p.x * 2, p.y, p.z * 2);   // ミクから見て外向きにする
+  //mesh.lookAt(p.x * 2, p.y, p.z * 2);   // ミクから見て外向きにする
   scene.add(mesh);
   laneMeshes[lane] = mesh;
 }
@@ -531,3 +531,22 @@ function show3DText(text, cnt, animeType) {
   start_next = start_next + 6;
   if (start_next > 17)start_next = start_next - 18;
 }
+window.addEventListener("keydown", (event) => {
+  const keyMap = {
+    KeyA: "fl", // 左前
+    KeyD: "fr", // 右前
+    KeyW: "bl", // 左奥
+    KeyS: "br"  // 右奥
+  };
+
+  const lane = keyMap[event.code];
+  if (!lane) return;
+
+  const p = LANES[lane];
+
+  // カメラを移動
+  camera.position.set(p.x, p.y + 5, p.z + 20);
+
+  // その歌詞を見る
+  camera.lookAt(p.x, p.y, p.z);
+});
