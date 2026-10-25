@@ -1,0 +1,6 @@
+﻿
+# Generated files and dependencies
+.parcel-cache/
+node_modules/
+dev/
+dist/
